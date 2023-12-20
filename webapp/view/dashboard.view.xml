@@ -1,0 +1,134 @@
+<mvc:View controllerName="com.kanban.dash.ZRPE_KB_DASH2.controller.dashboard" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:microchart="sap.suite.ui.microchart" xmlns:table="sap.ui.table" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<customHeader>
+						<Bar>
+							<contentLeft>
+								<Button type="Back" press="onNavBack" width="5rem"/>
+								<Label text="{i18n>User}"/>
+								<Text id="userText"/>
+							</contentLeft>
+							<contentRight>
+								<Label text="{i18n>Plant}"/>
+								<Text id="plantText"/>
+								<Text id="ProdLineVerText"/>
+								<Text id="systemText"/>
+							</contentRight>
+						</Bar>
+					</customHeader>
+					<content>
+						<!--<smartFilterBar:SmartFilterBar id="smartFilterBar" filterBarExpanded="true" entitySet="ControlCycle" persistencyKey="SmartFilter_Explored">-->
+						<!--	<smartFilterBar:controlConfiguration id="controlConfigurationSmartFilterBar">-->
+						<!--		<smartFilterBar:ControlConfiguration id="supplyAreaConfiguration" key="SupplyAreaID" preventInitialDataFetchInValueHelpDialog="false"-->
+						<!--			visibleInAdvancedArea="true" label="{i18n>SupplyArea}">-->
+						<!--			<smartFilterBar:customControl>-->
+						<!--				<MultiComboBox id="supplyAreaFilter" items="{ path: '/SupplyAreaVHSet', factory: '.supplyAreaFactory'}"-->
+						<!--					selectionFinish="onSupplyAreaSlecteionFinish"></MultiComboBox>-->
+						<!--			</smartFilterBar:customControl>-->
+						<!--		</smartFilterBar:ControlConfiguration>-->
+						<!--	</smartFilterBar:controlConfiguration>-->
+						<!--</smartFilterBar:SmartFilterBar>-->
+						<!--<smartTable:SmartTable id="controlCycleSmartTable" beforeRebindTable="onBeforeRebindTable" entitySet="ControlCycleSet"-->
+						<!--	smartFilterId="smartFilterBar" tableType="Table" useExportToExcel="false" useVariantManagement="false" useTablePersonalisation="false"-->
+						<!--	header="{i18n>ControlCycles}" showRowCount="true" initiallyVisibleFields="ControlCycleID,MaterialNo,SupplyArea"-->
+						<!--	requestAtLeastFields="ControlCycleID,MaterialNo,SupplyArea" persistencyKey="SmartTableAnalytical_Explored"-->
+						<!--	enableAutoBinding="true" demandPopin="true" class="sapUiResponsiveContentPadding" initialise="onSmartTableInitialised">-->
+						<fb:FilterBar showFilterConfiguration="false" filterBarExpanded="true" useToolbar="false">
+							<fb:filterGroupItems>
+								<fb:FilterGroupItem groupName="SupplyArea" name="SupplyArea" label="{i18n>SupplyArea}" visibleInFilterBar="true">
+									<fb:control>
+										<MultiComboBox id="supplyAreaFilter" items="{ path: '/SupplyAreaVHSet', factory: '.supplyAreaFactory'}" selectionFinish="onSearchSupplyArea"></MultiComboBox>
+									</fb:control>
+								</fb:FilterGroupItem>
+							</fb:filterGroupItems>
+						</fb:FilterBar>
+						<Table id="controlCycleTable" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+							growing="true" growingThreshold="40" items="{path: 'kanbanList>/'}" sticky="ColumnHeaders">
+							<columns>
+								<Column width="4rem">
+									<Text text="Product"/>
+								</Column>
+								<Column width="4rem">
+									<Text text="Description"/>
+								</Column>
+								<Column width="12em">
+									<Text text="Status OverView"/>
+								</Column>
+								<Column width="2rem">
+									<Text text="Kanbans Full"/>
+								</Column>
+								<Column width="2rem">
+									<Text text="Actual Quantity"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<HBox>
+											<Text
+												text="{ path: 'kanbanList>MaterialNo', type : 'sap.ui.model.odata.type.String', constraints: { isDigitSequence : true, maxLength : 10 } }"/>
+										</HBox>
+										<HBox>
+											<Text text="{kanbanList>MaterialDesc}"/>
+										</HBox>
+										<!--<VBox height="3rem">-->
+										<FlexBox renderType="Bare" class="sapUiTinyMargin" direction="Column" height="5.5rem">
+											<!--<HBox items="{path:'CycleToStatus'}" class="zzzzzzbulletclass">-->
+											<FlexBox renderType="Bare" class="sapUiNoMarginBottom">
+												<items>
+													<!--<microchart:BulletMicroChart targetValue="{path : 'kanbanList>blue' , formatter : '.myFormatter'}" minValue="0" maxValue="1"-->
+													<!--	size="Responsive" height="18px" forecastValue="{path : 'kanbanList>Full2' , formatter : '.myFormatter'}" class="sapUiTinyMargin">-->
+													<!--<microchart:BulletMicroChart minValue="0" maxValue="1" size="Responsive" height="18px" showThresholds="true">-->
+													<!--	<microchart:actual>-->
+													<!--		<microchart:BulletMicroChartData value="{path : 'kanbanList>Full2' , formatter : '.myFormatter'}" color="Neutral"/>-->
+													<!--	</microchart:actual>-->
+													<!--</microchart:BulletMicroChart>-->
+													<microchart:BulletMicroChart size="Responsive" minValue="0" maxValue="1" targetValue="{path : 'kanbanList>blue' , formatter : '.myFormatter'}" class="sapUiTinyMarginBottom">
+														<microchart:actual>
+															<microchart:BulletMicroChartData value="{path : 'kanbanList>Full2' , formatter : '.myFormatter'}" color="Neutral"/>
+														</microchart:actual>
+													</microchart:BulletMicroChart>
+												</items>
+											</FlexBox>
+											<!--</HBox>-->
+											<!--<HBox items="{path:'CycleToStatus'}" class="zzzzzstackedclass">-->
+											<FlexBox renderType="Bare" class="sapUiNoMarginTop" height="1.5rem">
+												<items >
+													<microchart:StackedBarMicroChart size="Responsive">
+														<microchart:bars>
+															<microchart:StackedBarMicroChartBar displayValue="{ path : 'kanbanList>red' , formatter : '.myFormatter' }"
+																value="{ path : 'kanbanList>red' , formatter : '.myFormatter' }" valueColor="red"/>
+															<microchart:StackedBarMicroChartBar displayValue="{ path : 'kanbanList>yellow' , formatter : '.myFormatter' }"
+																value="{ path : 'kanbanList>yellow' , formatter : '.myFormatter' }" valueColor="yellow"/>
+															<microchart:StackedBarMicroChartBar displayValue="{ path : 'kanbanList>green' , formatter : '.myFormatter' }"
+																value="{ path : 'kanbanList>green' , formatter : '.myFormatter' }" valueColor="green"/>
+														</microchart:bars>
+													</microchart:StackedBarMicroChart>
+												</items>
+											</FlexBox>
+											<!--</HBox>-->
+										</FlexBox>
+										<HBox>
+											<Text text="{path:'kanbanList>Full' , formatter:'.formatter.formatDecimalScale'}"/>
+										</HBox>
+										<HBox>
+											<Text text="{path:'kanbanList>ActualQuantity' , formatter:'.formatter.formatDecimalScale'}"/>
+										</HBox>
+										<!--</VBox>-->
+										<!--items="{ path:'supplyToOverview' }"-->
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						<!--</smartTable:SmartTable>-->
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

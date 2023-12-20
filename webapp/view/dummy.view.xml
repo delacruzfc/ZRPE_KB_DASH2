@@ -1,0 +1,85 @@
+<mvc:View controllerName="com.kanban.dash.ZRPE_KB_DASH2.controller.dashboard" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:microchart="sap.suite.ui.microchart" xmlns:table="sap.ui.table"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<smartFilterBar:SmartFilterBar id="smartFilterBar" filterBarExpanded="true" entitySet="ControlCycle"
+							persistencyKey="SmartFilter_Explored">
+							<smartFilterBar:controlConfiguration id="controlConfigurationSmartFilterBar">
+								<smartFilterBar:ControlConfiguration id="supplyAreaConfiguration" key="SupplyAreaID" preventInitialDataFetchInValueHelpDialog="false"
+									visibleInAdvancedArea="true" label="{i18n>SupplyArea}">
+									<smartFilterBar:customControl>
+										<MultiComboBox id="supplyAreaFilter" items="{ path: '/SupplyAreaVHSet', factory: '.supplyAreaFactory'}"
+											selectionFinish="onSupplyAreaSlecteionFinish"></MultiComboBox>
+									</smartFilterBar:customControl>
+								</smartFilterBar:ControlConfiguration>
+							</smartFilterBar:controlConfiguration>
+						</smartFilterBar:SmartFilterBar>
+						<smartTable:SmartTable id="controlCycleSmartTable" beforeRebindTable="onBeforeRebindTable" entitySet="ControlCycleSet"
+							smartFilterId="smartFilterBar" tableType="Table" useExportToExcel="false" useVariantManagement="false" useTablePersonalisation="false"
+							header="{i18n>ControlCycles}" showRowCount="true" initiallyVisibleFields="ControlCycleID,MaterialNo,Plant,SupplyArea,Responsible,StoringPos"
+							requestAtLeastFields="ControlCycleID,MaterialNo,Plant,SupplyArea,Responsible,StoringPos" persistencyKey="SmartTableAnalytical_Explored" 
+							enableAutoBinding="true" demandPopin="true"
+							class="sapUiResponsiveContentPadding" initialise="onSmartTableInitialised">
+							<Table id="controlCycleTable" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+								growing="true" growingThreshold="40">
+								<columns>
+									<Column hAlign="Begin" width="25%" minScreenWidth="Tablet">
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "MaterialNo", "columnIndex":"1"}'/>
+										</customData>
+										<Text text="{i18n>Material}"/>
+									</Column>
+									<Column hAlign="Begin" width="50%" minScreenWidth="Tablet">
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatusOverview", "columnIndex":"2"}'/>
+										</customData>
+										<Text text="{i18n>StatusOverview}"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem vAlign="Middle">
+										<cells>
+											<HBox>
+												<ObjectIdentifier title="{MaterialNo}"/>
+											</HBox>
+											<VBox height="3rem">
+												<HBox items="{path:'CycleToStatus'}" class="zzzzzzbulletclass" height="1rem">
+													<microchart:BulletMicroChart targetValue="{ path : 'Empty' , formatter : '.myFormatter' }"
+														minValue="{path : 'Pending' , formatter : '.myFormatter'}" maxValue="{path : 'Full' , formatter : '.myFormatter'}" size="Responsive"
+														height="18px" press="press" >
+														<microchart:actual>
+															<microchart:BulletMicroChartData value="100" color="Good"/>
+														</microchart:actual>
+													</microchart:BulletMicroChart>
+												</HBox>
+												<HBox items="{path:'CycleToStatus'}" class="zzzzzstackedclass" height="1rem" >
+													<microchart:StackedBarMicroChart size="L" >
+														<microchart:bars>
+															<microchart:StackedBarMicroChartBar displayValue="{ path : 'Empty' , formatter : '.myFormatter' }"
+																value="{ path : 'Empty' , formatter : '.myFormatter' }" />
+															<microchart:StackedBarMicroChartBar displayValue="{ path : 'Pending' , formatter : '.myFormatter' }"
+																value="{ path : 'Pending' , formatter : '.myFormatter' }"/>
+															<microchart:StackedBarMicroChartBar displayValue="{ path : 'Full' , formatter : '.myFormatter' }"
+																value="{ path : 'Full' , formatter : '.myFormatter' }"/>
+														</microchart:bars>
+													</microchart:StackedBarMicroChart>
+												</HBox>
+												
+											</VBox>
+											<!--items="{ path:'supplyToOverview' }"-->
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

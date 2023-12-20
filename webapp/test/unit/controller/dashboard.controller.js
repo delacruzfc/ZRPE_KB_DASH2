@@ -1,0 +1,1 @@
+sap.ui.define(["com/kanban/dash/ZRPE_KB_DASH2/controller/dashboard.controller"],function(o){"use strict";QUnit.module("dashboard Controller");QUnit.test("I should test the dashboard controller",function(n){var t=new o;t.onInit();n.ok(t)})});

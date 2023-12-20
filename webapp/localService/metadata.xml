@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="ZRPE_KANBAN_DASHBOARD_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="SupplyAreaVH" sap:content-version="1">
+				<Key><PropertyRef Name="SupplyAreaID"/></Key><Property Name="SupplyAreaID" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Supply Area"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="SupplyAreaDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="SupplyAreaDefault" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Default"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="KanbanOverview" sap:content-version="1">
+				<Key><PropertyRef Name="MaterialNo"/></Key><Property Name="MaterialNo" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Material No"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="MaterialDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Full" Type="Edm.Float" Nullable="false" sap:unicode="false" sap:label="Full count" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="KanbanNum" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Kanban total" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Safety" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Safety stock" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Threshold" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Threshold count"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="red" Type="Edm.Float" Nullable="false" sap:unicode="false" sap:label="Red count" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="yellow" Type="Edm.Float" Nullable="false" sap:unicode="false" sap:label="yellow count" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="green" Type="Edm.Float" Nullable="false" sap:unicode="false" sap:label="green count" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="blue" Type="Edm.Float" Nullable="false" sap:unicode="false" sap:label="Blue count" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ActualQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Actual quantity"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Full2" Type="Edm.Float" Nullable="false" sap:unicode="false" sap:label="Full count" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="ControlCycle" sap:content-version="1">
+				<Key><PropertyRef Name="ControlCycleID"/></Key><Property Name="ControlCycleID" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Contr.cycle no."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="MaterialNo" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Material No"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Plant" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="SupplyArea" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Supply Area"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Responsible" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Person Respons."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false"/><Property Name="MaterialDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="StoringPos" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Storing Pos."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="StatusSequence" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Status Sequence"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityContainer Name="ZRPE_KANBAN_DASHBOARD_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="SupplyAreaVHSet" EntityType="ZRPE_KANBAN_DASHBOARD_SRV.SupplyAreaVH" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="KanbanOverviewSet" EntityType="ZRPE_KANBAN_DASHBOARD_SRV.KanbanOverview" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="ControlCycleSet" EntityType="ZRPE_KANBAN_DASHBOARD_SRV.ControlCycle" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/></EntityContainer><atom:link rel="self"
+				href="https://webidecp-h88ec79f4.dispatcher.us3.hana.ondemand.com/destinations/glob-gateway-development_pp/sap/opu/odata/sap/ZRPE_KANBAN_DASHBOARD_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/><atom:link rel="latest-version"
+				href="https://webidecp-h88ec79f4.dispatcher.us3.hana.ondemand.com/destinations/glob-gateway-development_pp/sap/opu/odata/sap/ZRPE_KANBAN_DASHBOARD_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
